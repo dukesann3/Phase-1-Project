@@ -1,47 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>FLATMO</title>
-        <link rel='stylesheet' href='style.css'>
-    </head>
-    <body>
 
-        <div id='search-fixed' class='main hide'>
-            <input type='text' placeholder='SEARCH' >
-            <button>TOP OF SCREEN</button>
-        </div>
+<head>
+    <title>FLATMO</title>
+    <link rel='stylesheet' href='style.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
 
-        <form id='login-form'>
-            <input type='text' placeholder='USERNAME'>
-            <input type='password' placeholder='PASSWORD'>
-            <input type='submit' value='LOGIN'>
-            <p>NEW?</p>
-            <button>CREATE AN ACCOUNT</button>
-        </form>
-        
-        <form id='create-an-account' class='hide'>
-            <h3>CREATE AN ACCOUNT</h3>
-            <input type='text' placeholder='USERNAME'>
-            <input type='password' placeholder='PASSWORD'>
-            <input type='password' placeholder='CONFIRM PASSWORD'>
-            <input type='submit' value='CREATE'>
-        </form>
+<body>
 
-        <ul id='transaction-list' class='main hide'>
+    <div id='search-fixed' class='main'>
+        <input type='text' placeholder='SEARCH'>
+        <button>TOP OF SCREEN</button>
+    </div>
 
+    <ul id='transaction-list' class='main hide'>
+
+    </ul>
+
+    <div id='selected-user-profile' class='hide'>
+        <h1 id='selcted-username'></h1>
+        <img id='selected-user-profile-picture' />
+        <ul id='selected-user-transaction-history'>
         </ul>
+    </div>
 
-        <div id='selected-user-profile' class='hide'>
-            <h1 id='selcted-username'></h1>
-            <img id='selected-user-profile-picture'/>
-            <ul id='selected-user-transaction-history'>
-            </ul>
-        </div>
+    <div id='pay-request' class='main hide'>
+        <button>PAY/REQUEST</button>
+    </div>
 
-        <div id='pay-request' class='main hide'>
-            <button>PAY/REQUEST</button>
-        </div>
-        
-    </body>
-    <script type='module' src='app.js'></script>
+</body>
+<script type='module' src='app.js'></script>
+
 </html>

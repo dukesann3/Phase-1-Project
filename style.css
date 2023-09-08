@@ -1,3 +1,65 @@
 .hide{
     display: none
 }
+
+body{
+    background: #1f2a2f;
+}
+
+/* FIXED SEARCHBAR */
+#search-fixed{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 2rem;
+    flex-direction: row;
+    z-index: 100;
+    background: #27363f;
+    height: 6rem;
+    top: -0.15rem;
+}
+
+#search-fixed > * {
+    margin-right: 2rem;
+}
+
+#search-fixed input{
+    width: 15rem;
+    height: 2.8rem;
+    border-radius: 1.625rem;
+    border: none;
+    background: #46565e;
+    outline: none;
+    padding: 0 3.5rem 0 1.5rem;
+}
+
+#search-fixed input::placeholder{
+    color: #d8dfe3;
+    font-family: 'roboto';
+}
+
+#search-fixed input:focus{
+    background: white;
+}
+
+#search-fixed input:focus::placeholder{
+    color: grey;
+}
+
+#search-fixed button{
+    width: 10rem;
+    height: 2rem;
+    border: none;
+    margin: 0.25rem 0 0 0;
+    border-radius: 1rem;
+    background: #46565e;
+    color: #e4edf2;
+    font-family: 'roboto';
+}
+
+#search-fixed button:hover{
+    cursor: pointer;
+    background: #588ea7;
+}
