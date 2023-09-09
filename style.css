@@ -140,6 +140,7 @@ body{
     position: relative;
     top: -.4rem;
     font-family: 'roboto';
+    font-weight: 200;
     color: #e4edf2;
 }
 
@@ -158,5 +159,6 @@ body{
     position: relative;
     top: -.6rem;
     font-family: 'roboto';
+    font-weight: 200;
     color: #e4edf2;
 }
