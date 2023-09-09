@@ -63,3 +63,100 @@ body{
     cursor: pointer;
     background: #588ea7;
 }
+
+/* TRANSACION HISTORY */
+#text-saying-transaction-history{
+    position: relative;
+    top: 6rem;
+    text-align: center;
+}
+
+#text-saying-transaction-history h1{
+    font-family: 'roboto';
+    color: #e4edf2;
+}
+
+#text-saying-transaction-history hr{
+    border: 1px solid #588ea7;
+}
+
+/* JS Created DOM Styling for Transaction Lists */
+#transaction-list{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 7rem;
+}
+
+#transaction-list .transaction{
+    display: flex;
+    flex-direction: row;
+    background: #496a7a;
+    margin: 0 2rem 0 2rem;
+    border-radius: 3rem;
+    height: 11rem;
+    padding: 1rem 3rem 0 5rem;
+    width: 55%;
+    border: .1rem solid #e7a918;
+}
+
+#transaction-list .transaction .user-initials{
+    margin-right: 1rem;
+    background: #e4edf2;
+    padding: 0 1rem 0 1rem;
+    border-radius: 3rem;
+    height: 3.7rem;
+}
+
+#transaction-list .transaction .user-initials h3{
+    color: #1f2a2f;
+    font-family: 'roboto';
+}
+
+.transaction .transaction-information-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #496a7a;
+    padding: 0 1rem 0 1rem;
+    height: 10rem;
+    width: 90%;
+    border-radius: 2rem;
+}
+
+.transaction .transaction-information-wrapper .reciever-and-payee{
+    position: relative;
+    left: 2rem;
+    background: #27363f;
+    height: 2rem;
+    width: 80%;
+    margin: .5rem 0 .25rem 0;
+    padding: 0 .5rem 1rem 1.5rem;
+    border-radius: 3rem;
+}
+
+/* In JS make username in yellow-orange color */
+.transaction .transaction-information-wrapper .reciever-and-payee h4{
+    position: relative;
+    top: -.4rem;
+    font-family: 'roboto';
+    color: #e4edf2;
+}
+
+.transaction .transaction-information-wrapper .transaction-description{
+    position: relative;
+    left: 2rem;
+    background: #27363f;
+    height: 4.2rem;
+    width: 80%;
+    margin: .5rem 0 .25rem 0;
+    padding: 0 .5rem 1rem 1.5rem;
+    border-radius: 1rem;
+}
+
+.transaction .transaction-information-wrapper .transaction-description h4{
+    position: relative;
+    top: -.6rem;
+    font-family: 'roboto';
+    color: #e4edf2;
+}
