@@ -74,6 +74,7 @@ body{
 #text-saying-transaction-history h1{
     font-family: 'roboto';
     color: #e4edf2;
+    letter-spacing: .15rem;
 }
 
 #text-saying-transaction-history hr{
