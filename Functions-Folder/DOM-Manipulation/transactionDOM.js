@@ -51,18 +51,21 @@ export function iter(itemToFlatten,flattenedArr=[]){
 
 //adds classes for each div included. Must be in order
 export function domFrameWorkClassAdder(domElement, classArray){
-    console.log(domElement);
-    if(!domElement || !classArray || domElement.children.length !== classArray.length){
+    if(!domElement || !classArray){
         console.log('Need both values AND have same amount of DOM elements as class array');
         return;
     }
-    let domElementArr = [];
-    for(const childNodes of domElement.children){
-        domElementArr.push(childNodes);
+    let i = 0;
+    let domArray = iter(domElement);
+    //adds parent node at the beginning of the array
+    //domArray.unshift(domElement.childNodes[0].parentElement);
+    for(const element of domArray){
+        element.classList.add(classArray[i]);
+        i++;
     }
-    console.log(domElementArr);
+    console.log(domElement);
+    return domElement;
 }
-
 
 export function returnsTransactionDOMFramework() {
     let transaction, userInitials, transactionInformationWrapper, recieverAndPayee, transactionDescription;
