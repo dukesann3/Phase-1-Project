@@ -12,6 +12,7 @@ GRAND PARENT -
                             |----> CHILD 2
                             |----> CHILD 3    
 */
+
 //creates a number of divs nested in each other
 export function divFrameWorkMaker(quantityOfChildren,parentDOM=undefined) {
     if(!parentDOM){
@@ -23,6 +24,7 @@ export function divFrameWorkMaker(quantityOfChildren,parentDOM=undefined) {
     }
     return parentDOM;
 }
+
 //able to add quantity of parent and number of children for corresponding parent. Quantity of children must be in order
 export function divFrameworkThreeLevelsOfTreeCreator(quantityOfParent, ...quantityOfChildN) {
     let origin;
@@ -32,16 +34,35 @@ export function divFrameworkThreeLevelsOfTreeCreator(quantityOfParent, ...quanti
     }
     return origin;
 }
+
+//Note that the returning array does not contain the parent element. Or does it?
+export function iter(itemToFlatten,flattenedArr=[]){
+    //if domelement.children exists, then go ahead and loop through it
+    if(itemToFlatten.children){
+        //loops through domelement.children
+        for(const childNodes of itemToFlatten.children){
+            flattenedArr.push(childNodes);
+            //goes through another iter, but retains the memory of the past iteration by inputting flattenedArr
+            iter(childNodes,flattenedArr);
+        }
+    }
+    return flattenedArr;
+}
+
 //adds classes for each div included. Must be in order
-export function domFrameWorkClassAdder(DOMelement, classArray){
-    if(!DOMelement || !classArray || DOMelement.children.length !== classArray.length){
+export function domFrameWorkClassAdder(domElement, classArray){
+    console.log(domElement);
+    if(!domElement || !classArray || domElement.children.length !== classArray.length){
         console.log('Need both values AND have same amount of DOM elements as class array');
         return;
     }
-    for(let i=0; i<classArray.length; i++){
-        console.log(DOMelement.children[i]);
+    let domElementArr = [];
+    for(const childNodes of domElement.children){
+        domElementArr.push(childNodes);
     }
+    console.log(domElementArr);
 }
+
 
 export function returnsTransactionDOMFramework() {
     let transaction, userInitials, transactionInformationWrapper, recieverAndPayee, transactionDescription;
