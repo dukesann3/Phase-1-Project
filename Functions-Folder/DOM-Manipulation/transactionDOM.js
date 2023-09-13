@@ -58,7 +58,7 @@ export function domFrameWorkClassAdder(domElement, classArray){
     let i = 0;
     let domArray = iter(domElement);
     //adds parent node at the beginning of the array
-    //domArray.unshift(domElement.childNodes[0].parentElement);
+    domArray.unshift(domElement.childNodes[0].parentElement);
     for(const element of domArray){
         element.classList.add(classArray[i]);
         i++;
@@ -66,6 +66,13 @@ export function domFrameWorkClassAdder(domElement, classArray){
     console.log(domElement);
     return domElement;
 }
+
+
+
+
+
+
+
 
 export function returnsTransactionDOMFramework() {
     let transaction, userInitials, transactionInformationWrapper, recieverAndPayee, transactionDescription;
