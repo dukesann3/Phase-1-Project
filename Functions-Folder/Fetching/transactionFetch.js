@@ -12,8 +12,9 @@ export function getTransaction(){
     return transactions;
 }
 
+
 //abstracted getTransactionData
-export function getTransactionData(transactionOrUsers, callback){
+export function getTransactionData(callback){
     const baseURL = 'http://localhost:3000/transactions';
     const result = fetch(baseURL)
     .then(response => response.json())
@@ -24,6 +25,7 @@ export function getTransactionData(transactionOrUsers, callback){
 
     return result;
 }
+
 
 //trying to loop thru fetched data until I find a certain object or array.
 /*
@@ -54,12 +56,6 @@ export function loopingThruFetchedData(data,property){
     return `cannot find property in object`;
 }
 */
-
-export function addsDOMInitialsAndDescription(transactionData,domElement){
-    const {payor,recipient,description} = transactionData;
-    domElement.querySelector();
-
-}
 
 
 

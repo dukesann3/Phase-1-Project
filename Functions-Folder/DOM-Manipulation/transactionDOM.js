@@ -74,6 +74,18 @@ export function domFrameWorkClassAdder(domElement, classArray){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+/*
 export function returnsTransactionDOMFramework() {
     let transaction, userInitials, transactionInformationWrapper, recieverAndPayee, transactionDescription;
 
@@ -107,4 +119,4 @@ function createAndAddClass(domType, className) {
     newDom.classList.add(className);
     return newDom;
 }
-
+*/
