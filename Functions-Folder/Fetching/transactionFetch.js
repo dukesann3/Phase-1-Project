@@ -1,4 +1,5 @@
 
+//ended up not using this
 export function getTransaction(){
     const baseURL = 'http://localhost:3000/transactions';
     const transactions = fetch(baseURL)
@@ -12,7 +13,7 @@ export function getTransaction(){
     return transactions;
 }
 
-
+//ended up not using this either
 //abstracted getTransactionData
 export function getTransactionData(callback){
     const baseURL = 'http://localhost:3000/transactions';

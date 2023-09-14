@@ -99,6 +99,7 @@ body{
     padding: 1rem 3rem 0 5rem;
     width: 55%;
     border: .1rem solid #e7a918;
+    margin-top: 2rem;
 }
 
 #transaction-list .transaction .user-initials{

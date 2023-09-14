@@ -13,7 +13,7 @@ GRAND PARENT -
                             |----> CHILD 3    
 */
 
-//creates a number of divs nested in each other
+//creates a div with one parent and takes the quantity of children as an argument
 export function divFrameWorkMaker(quantityOfChildren,parentDOM=undefined) {
     if(!parentDOM){
         parentDOM = document.createElement('div');
@@ -25,7 +25,10 @@ export function divFrameWorkMaker(quantityOfChildren,parentDOM=undefined) {
     return parentDOM;
 }
 
-//able to add quantity of parent and number of children for corresponding parent. Quantity of children must be in order
+//makes new DOM with one single parent (enclosing) gets quantity of children out of the "origin" parent.
+//The children can also have children. The second argument calls for the quantity of children from its parents.
+//e.g. divFrameworkThreeLevelsOfTreeCreator(2,6,9)...
+//the example above will mean it will have one "grand" parent, 2 parents, and [6 children for first parent, 9 children for second parent].
 export function divFrameworkThreeLevelsOfTreeCreator(quantityOfParent, ...quantityOfChildN) {
     let origin;
     origin = divFrameWorkMaker(quantityOfParent);
@@ -35,7 +38,21 @@ export function divFrameworkThreeLevelsOfTreeCreator(quantityOfParent, ...quanti
     return origin;
 }
 
-//Note that the returning array does not contain the parent element. Or does it?
+//this will iterate through a node element (not a node list).
+//e.g. <div> <div> <div></div> </div> </div>
+//it will return all divs inside of the enclosing div in an array.
+//the caveat is that it does not return the parent (enclosing).
+/*
+    What is happening in the function is... 
+    If children exists in a node element, it will loop through all the children and pushes them in an array called flattenedArr.
+    flattenedArr is undefined as first usually. It will populate as it goes.
+    As it is looping through the children arr, it pushes in flattenedArr
+    It will then call itself back again to see if there is anything inside of the DOM child as well.
+    It essentially goes through another loop until it DOM child has no more DOM child of its own.
+    Then, it will loop again back to its original level if DOM child has no more DOm child of its own.
+    And note that iter in the loop contains flattenedArr as a second argument. This will keep the memory of its iterations so 
+    the memory of the array does not go away.
+*/
 export function iter(itemToFlatten,flattenedArr=[]){
     //if domelement.children exists, then go ahead and loop through it
     if(itemToFlatten.children){
@@ -49,7 +66,9 @@ export function iter(itemToFlatten,flattenedArr=[]){
     return flattenedArr;
 }
 
-//adds classes for each div included. Must be in order
+//takes a DOM element as an argument and array of class names.
+//uses iter to flatten the node element and use unshift and get the 'origin' parent node and place it in the beginning of the array.
+//it will iterate through the array of nodes and it will add class names in the order of the array indexes.
 export function domFrameWorkClassAdder(domElement, classArray){
     if(!domElement || !classArray){
         console.log('Need both values AND have same amount of DOM elements as class array');
@@ -82,41 +101,3 @@ export function domFrameWorkClassAdder(domElement, classArray){
 
 
 
-
-
-
-/*
-export function returnsTransactionDOMFramework() {
-    let transaction, userInitials, transactionInformationWrapper, recieverAndPayee, transactionDescription;
-
-    transaction = createAndAddClass('div', 'transaction');
-    userInitials = createAndAddClass('div', 'user-initials');
-    transaction.appendChild(userInitials);
-    transactionInformationWrapper = createAndAddClass('div', 'transaction-information-wrapper');
-    transaction.appendChild(transactionInformationWrapper);
-    recieverAndPayee = createAndAddClass('div', 'reciever-and-payee');
-    transactionInformationWrapper.appendChild(recieverAndPayee);
-    transactionDescription = createAndAddClass('div', 'transaction-description');
-    transactionInformationWrapper.appendChild(transactionDescription);
-
-    const returnObject = {
-        transaction: transaction,
-        userInitials: userInitials,
-        transactionInformationWrapper: transactionInformationWrapper,
-        recieverAndPayee: recieverAndPayee,
-        transactionDescription: transactionDescription
-    }
-    return returnObject;
-}
-
-
-
-
-//adds both DOM, class, and style
-function createAndAddClass(domType, className) {
-    let newDom;
-    newDom = document.createElement(domType);
-    newDom.classList.add(className);
-    return newDom;
-}
-*/

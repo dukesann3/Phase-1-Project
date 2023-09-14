@@ -6,7 +6,7 @@ const transactionParent = document.querySelector('#transaction-list');
 
 document.addEventListener('DOMContentLoaded', function (e) {
     e.preventDefault();
-    fetchTransactionAndSetUpDOM()
+    fetchTransactionAndSetUpDOM();
 });
 
 
