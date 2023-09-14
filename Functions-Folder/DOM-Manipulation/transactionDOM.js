@@ -82,7 +82,6 @@ export function domFrameWorkClassAdder(domElement, classArray){
         element.classList.add(classArray[i]);
         i++;
     }
-    console.log(domElement);
     return domElement;
 }
 

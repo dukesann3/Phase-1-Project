@@ -1,12 +1,17 @@
-import { getTransaction, getTransactionData } from "/Functions-Folder/Fetching/transactionFetch.js";
+import { search } from "./Functions-Folder/Search-Methods/searching.js";
 import { divFrameworkThreeLevelsOfTreeCreator, domFrameWorkClassAdder } from "./Functions-Folder/DOM-Manipulation/transactionDOM.js";
 
 const classListArrayTransaction = ['transaction', 'user-initials', 'transaction-information-wrapper', 'reciever-and-payee', 'transaction-description'];
 const transactionParent = document.querySelector('#transaction-list');
+const searchDOM = document.querySelector('.search-fixed input');
 
 document.addEventListener('DOMContentLoaded', function (e) {
     e.preventDefault();
     fetchTransactionAndSetUpDOM();
+    document.addEventListener('change',(e)=>{
+        e.preventDefault();
+        search(transactionParent,e.target.value);
+    })
 });
 
 
@@ -20,7 +25,6 @@ function getInitials(payorName) {
         arrayOfLetters.push(word.charAt(0));
     })
     const initials = arrayOfLetters.join("");
-    console.log(initials);
     return initials;
 }
 
@@ -45,9 +49,11 @@ function setUpTransactionDOM(payor, recipient, description) {
     descriptionOfTransaction.textContent = description;
     descriptionParent.appendChild(descriptionOfTransaction);
 
-    transactionParent.appendChild(domWithClass);
+    //sets atribute here...
+    domWithClass.setAttribute("payor",payor);
+    domWithClass.setAttribute("recipient",recipient);
 
-    console.log(domWithClass);
+    transactionParent.appendChild(domWithClass);
     return domWithClass;
 }
 
