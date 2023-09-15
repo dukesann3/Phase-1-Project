@@ -174,6 +174,45 @@ body{
     color: #e4edf2;
 }
 
+#pop-up{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    position: absolute;
+    background: white;
+    z-index: 10000;
+    top: 30%;
+    left: 36%;
+    padding: 2rem;
+    border-radius: 1.25rem;
+    align-items: center;
+}
+
+#pop-up .initials{
+    margin-right: 1rem;
+    background: #46565e;
+    padding: 0 1rem 0 1rem;
+    border-radius: 3rem;
+    height: 3.7rem;
+    margin-bottom: 1rem;
+}
+
+#pop-up .initials h3{
+    color: #e4edf2;
+    font-family: 'roboto';
+}
+
+#pop-up input{
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
 .hide{
     display: none
 }
