@@ -1,6 +1,4 @@
-.hide{
-    display: none
-}
+
 
 body{
     background: #1f2a2f;
@@ -163,4 +161,12 @@ body{
     font-family: 'roboto';
     font-weight: 200;
     color: #e4edf2;
+}
+
+.hide{
+    display: none
+}
+
+#hide{
+    display: none;
 }

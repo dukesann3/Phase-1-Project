@@ -11,19 +11,24 @@ export function search(domList,keyword){
     let newArr = Array.from(domList.children);
     let trimmedKeyword = keyword.replaceAll(' ','');
     let lowercasedTrimmedKeyword = trimmedKeyword.toLowerCase();
-    console.log(lowercasedTrimmedKeyword);
 
     let results = newArr.filter((node) => {
         //concat payor and reciever name together no spaces
-        console.log(node);
         let payorAndReciever = node.getAttribute("payor") + node.getAttribute("recipient");
         //make lowercase payor and reciever name as well as input.
         let trimmedString = payorAndReciever.toLowerCase().replaceAll(' ','');
-        console.log(trimmedString);
-        let isInsideArr = trimmedString.includes(trimmedKeyword);
+        let isInsideArr = trimmedString.includes(lowercasedTrimmedKeyword);
+        if(isInsideArr && keyword.length!==0){
+            //couldn't use class list because transaction class took precedence over the hide class.
+            node.style.display = 'none';
+        }
+        else{
+            //removes style in html if not included in array
+            node.removeAttribute('style');
+        }
+
         return isInsideArr;
     });
-
     console.log(results);
     return results;
 }

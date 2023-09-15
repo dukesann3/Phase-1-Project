@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
     e.preventDefault();
     fetchTransactionAndSetUpDOM();
     document.addEventListener('change',(e)=>{
-        e.preventDefault();
         search(transactionParent,e.target.value);
-    })
+    });
+
 });
 
 
