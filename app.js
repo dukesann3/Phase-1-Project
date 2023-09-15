@@ -3,12 +3,13 @@ import { divFrameworkThreeLevelsOfTreeCreator, domFrameWorkClassAdder } from "./
 
 const classListArrayTransaction = ['transaction', 'user-initials', 'transaction-information-wrapper', 'reciever-and-payee', 'transaction-description'];
 const transactionParent = document.querySelector('#transaction-list');
-const searchDOM = document.querySelector('.search-fixed input');
+const searchDOM = document.querySelector('#search-fixed');
 
 document.addEventListener('DOMContentLoaded', function (e) {
     e.preventDefault();
     fetchTransactionAndSetUpDOM();
-    document.addEventListener('change',(e)=>{
+    searchDOM.addEventListener('change',(e)=>{
+        console.log(e.target.value);
         search(transactionParent,e.target.value);
     });
 
