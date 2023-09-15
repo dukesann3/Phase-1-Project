@@ -47,10 +47,21 @@ body{
 }
 
 #search-fixed button{
-    width: 10rem;
+    width: 4rem;
     height: 2rem;
     border: none;
-    margin: 0.25rem 0 0 0;
+    margin: 0.15rem 0 0 0;
+    border-radius: 1rem;
+    background: #46565e;
+    color: #e4edf2;
+    font-family: 'roboto';
+}
+
+#search-fixed .pay{
+    width: 4rem;
+    height: 2rem;
+    border: none;
+    margin: 0.15rem 0 0 1rem;
     border-radius: 1rem;
     background: #46565e;
     color: #e4edf2;

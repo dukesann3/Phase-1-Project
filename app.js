@@ -3,13 +3,14 @@ import { divFrameworkThreeLevelsOfTreeCreator, domFrameWorkClassAdder } from "./
 
 const classListArrayTransaction = ['transaction', 'user-initials', 'transaction-information-wrapper', 'reciever-and-payee', 'transaction-description'];
 const transactionParent = document.querySelector('#transaction-list');
-const searchDOM = document.querySelector('#search-fixed');
+const searchDOM = document.querySelector('#search-fixed input');
 
 document.addEventListener('DOMContentLoaded', function (e) {
     e.preventDefault();
     fetchTransactionAndSetUpDOM();
-    searchDOM.addEventListener('change',(e)=>{
-        console.log(e.target.value);
+    //subject to change... Cannot get it to update 'change'
+    searchDOM.addEventListener('input',(e)=>{
+        e.preventDefault();
         search(transactionParent,e.target.value);
     });
 

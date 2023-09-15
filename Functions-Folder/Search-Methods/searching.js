@@ -29,6 +29,5 @@ export function search(domList,keyword){
 
         return isInsideArr;
     });
-    console.log(results);
     return results;
 }
