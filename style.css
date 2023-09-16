@@ -197,6 +197,19 @@ body{
     border: .05rem solid #e6b632;
 }
 
+#pop-up h5{
+    position: absolute;
+    top: -3%;
+    left: 90%;
+    color: #e4edf2;
+    font-family: 'roboto';
+}
+
+#pop-up h5:hover{
+    color: #46565e;
+    cursor: pointer;
+}
+
 #pop-up h2{
     color: #e4edf2;
     font-family: 'roboto';
@@ -209,6 +222,7 @@ body{
     border-radius: 3rem;
     height: 3.7rem;
     margin-bottom: 1rem;
+    filter: none;
 }
 
 #pop-up .initials h3{
@@ -253,4 +267,12 @@ body{
     font-family: 'roboto';
     resize: none;
 }
+
+/*
+body > *:not(.pop-up-indicator){
+    filter: blur(10px);
+}
+*/
+
+
 
