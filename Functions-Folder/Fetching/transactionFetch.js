@@ -58,6 +58,13 @@ export function loopingThruFetchedData(data,property){
 }
 */
 
+export async function transactionRecieverName(){
+    return fetch('http://localhost:3000/users')
+    .then((response) => {
+        return response.json();
+    })
+}
+
 
 
 
