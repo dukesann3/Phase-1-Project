@@ -1,4 +1,10 @@
+.hide{
+    display: none
+}
 
+#hide{
+    display: none;
+}
 
 body{
     background: #1f2a2f;
@@ -174,23 +180,31 @@ body{
     color: #e4edf2;
 }
 
+/* pop-up form styles */
+
 #pop-up{
     display: flex;
     flex-direction: column;
     width: 25%;
-    position: absolute;
-    background: white;
+    position: fixed;
+    background: #1f2a2f;
     z-index: 10000;
-    top: 30%;
+    top: 20%;
     left: 36%;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 1.25rem;
     align-items: center;
+    border: .05rem solid #e6b632;
+}
+
+#pop-up h2{
+    color: #e4edf2;
+    font-family: 'roboto';
 }
 
 #pop-up .initials{
     margin-right: 1rem;
-    background: #46565e;
+    background: #2b9ce3;
     padding: 0 1rem 0 1rem;
     border-radius: 3rem;
     height: 3.7rem;
@@ -206,17 +220,37 @@ body{
     margin-bottom: 1rem;
 }
 
-
-
-
-
-
-
-
-.hide{
-    display: none
+#pop-up input[type="text"]{
+    width: 80%;
+    height: 1.75rem;
+    border: none;
+    border-radius: 1.25rem;
+    padding: 0 1rem 0 1rem;
+    font-family: 'roboto';
 }
 
-#hide{
-    display: none;
+#pop-up input[type='submit']{
+    width: 25%;
+    height: 1.75rem;
+    border: none;
+    border-radius: 1.25rem;
+    padding: 0 1rem 0 1rem;
+    font-family: 'roboto';
 }
+
+#pop-up input[type='submit']:hover{
+    background: #46565e;
+    cursor: pointer;
+}
+ 
+#pop-up textarea{
+    width: 80%;
+    height: 3rem;
+    border: none;
+    margin-bottom: 1rem;
+    border-radius: 1.25rem;
+    padding: .25rem 1rem 0 1rem;
+    font-family: 'roboto';
+    resize: none;
+}
+
