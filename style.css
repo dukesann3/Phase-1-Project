@@ -181,7 +181,7 @@ body{
 }
 
 /* pop-up form styles */
-
+/* default HTML class is hide, but will turn into pop-up when clicked */
 #pop-up{
     display: flex;
     flex-direction: column;
