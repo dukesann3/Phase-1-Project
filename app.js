@@ -35,14 +35,7 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             element.style = "filter: blur(10px);";
         });
     });
-    exitFormDOM.addEventListener('click', (e) => {
-        e.preventDefault();
-        popUpDOM.classList.add('hide');
-        popUpDOM.removeAttribute('id');
-        everythingExceptForm.forEach((element) => {
-            element.style = "filter: none;";
-        });
-    });
+    exitFormDOM.addEventListener('click', ()=>{hidePopUp()});
     optionsDOM.addEventListener('click', addOptionsFromFetchedValue(optionsDOM, 'User', 'Name'));
     paymentAmountDOM.addEventListener('click', function (e) {
         e.target.addEventListener('input', function (e) {
