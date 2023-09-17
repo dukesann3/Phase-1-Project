@@ -1,28 +1,28 @@
 
 //ended up not using this
-export function getTransaction(){
+export function getTransaction() {
     const baseURL = 'http://localhost:3000/transactions';
     const transactions = fetch(baseURL)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => {
-        console.log(error);
-        alert('can\'t connect');
-    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.log(error);
+            alert('can\'t connect');
+        })
 
     return transactions;
 }
 
 //ended up not using this either
 //abstracted getTransactionData
-export function getTransactionData(callback){
+export function getTransactionData(callback) {
     const baseURL = 'http://localhost:3000/transactions';
     const result = fetch(baseURL)
-    .then(response => response.json())
-    .then(data => callback(data))
-    .catch((error) => {
-        console.log(error);
-    });
+        .then(response => response.json())
+        .then(data => callback(data))
+        .catch((error) => {
+            console.log(error);
+        });
 
     return result;
 }
@@ -58,11 +58,59 @@ export function loopingThruFetchedData(data,property){
 }
 */
 
-export async function transactionRecieverName(){
+export async function transactionRecieverName() {
     return fetch('http://localhost:3000/users')
+        .then((response) => {
+            return response.json();
+        })
+}
+
+/*
+POST REQUEST EXAMPLE
+
+fetch("https://jsonplaceholder.typicode.com/todos", {
+  method: "POST",
+  body: JSON.stringify({
+    userId: 1,
+    title: "Fix my bugs",
+    completed: false
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"
+  }
+});
+
+*/
+
+/*
+    What is included in json-server trasnaction list?
+
+        "payor": "Jessica Johnson",
+        "recipient": "Houston McMaster",
+        "pay_amount": 230,
+        "description": "Nice dinner and wine"
+*/
+
+export async function postSubmitalInformation(payor,recipient,pay_amount,description) {
+    const body = {
+        payor: payor,
+        recipient: recipient,
+        pay_amount: pay_amount,
+        description: description
+    }
+
+    return fetch('http://localhost:3000/transactions', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
     .then((response) => {
         return response.json();
     })
+
+
 }
 
 

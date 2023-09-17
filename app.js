@@ -1,6 +1,7 @@
 import { search } from "./Functions-Folder/Search-Methods/searching.js";
 import { divFrameworkThreeLevelsOfTreeCreator, domFrameWorkClassAdder } from "./Functions-Folder/DOM-Manipulation/transactionDOM.js";
-import { transactionRecieverName } from "./Functions-Folder/Fetching/transactionFetch.js";
+import { transactionRecieverName, postSubmitalInformation } from "./Functions-Folder/Fetching/transactionFetch.js";
+import { addOptionsValue } from "./Functions-Folder/DOM-Manipulation/optionsAddingUser.js";
 
 const classListArrayTransaction = ['transaction', 'user-initials', 'transaction-information-wrapper', 'reciever-and-payee', 'transaction-description'];
 const transactionParent = document.querySelector('#transaction-list');
@@ -9,6 +10,10 @@ const payDOM = document.querySelector('#search-fixed button');
 const popUpDOM = document.querySelector('.pop-up-indicator');
 const everythingExceptForm = document.querySelectorAll('div:not(.pop-up-indicator)');
 const exitFormDOM = document.querySelector('.pop-up-indicator h5');
+const optionsDOM = document.querySelector('.reciever-name');
+const paymentAmountDOM = popUpDOM.querySelector('input[type=text]');
+const textAreaDOM = popUpDOM.querySelector('textarea');
+const formSubmitalDOM = popUpDOM.querySelector('input[type=submit]');
 
 document.addEventListener('DOMContentLoaded', async function (e) {
     e.preventDefault();
@@ -24,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async function (e) {
         popUpDOM.setAttribute('id', 'pop-up');
         everythingExceptForm.forEach((element) => {
             //blurs everything except for form initials div
-            if (element.classList.contains('initials')) {
+            if (element.classList.contains('initials') || element.hasAttribute('isDropDownMenu')) {
                 return;
             }
             element.style = "filter: blur(10px);";
@@ -38,8 +43,37 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             element.style = "filter: none;";
         });
     });
-    let result = await transactionRecieverName();
-    console.log(result);
+    optionsDOM.addEventListener('click', addOptionsFromFetchedValue(optionsDOM, 'User', 'Name'));
+    paymentAmountDOM.addEventListener('click', function (e) {
+        e.target.addEventListener('input', function (e) {
+            if (e.target.value && isNaN(e.target.value)) {
+                alert('need a number for payment amount');
+                //deletes NaN value from input area
+                e.target.value = '';
+            }
+        })
+    });
+    textAreaDOM.addEventListener('blur', function (e) {
+        if (!e.target.value) {
+            alert('need a description for payment');
+        }
+    });
+    formSubmitalDOM.addEventListener('click', async function (e) {
+        e.preventDefault();
+        if(isFormIsGoodToSubmit(optionsDOM.value, paymentAmountDOM.value, textAreaDOM.value)){
+            let postedData = await postSubmitalInformation('User Name',optionsDOM.value,parseInt(paymentAmountDOM.value,10),textAreaDOM.value);
+            if(postedData){
+                const {payor, recipient, description} = postedData;
+                setUpTransactionDOM(payor,recipient,description);
+                alert('Transaction Successful');
+                hidePopUp();
+            }
+        }
+        else{
+            alert('Need to Fill Out Entire Form');
+        }
+    })
+
 });
 
 
@@ -101,6 +135,46 @@ function fetchTransactionAndSetUpDOM() {
 
     return result;
 }
+
+async function addOptionsFromFetchedValue(parentDOM, firstNameOmit, lastNameOmit) {
+    let result = await transactionRecieverName();
+    let potentialRecieverNamesArr = [];
+    result.forEach((object) => {
+        let { first_name, last_name } = object;
+        if (first_name === firstNameOmit && last_name === lastNameOmit) {
+            //skips omitted users
+            //in other words this is used to not display the actual user's name
+            return;
+        }
+        let displayName = first_name + ' ' + last_name;
+        potentialRecieverNamesArr.push(displayName);
+    })
+    addOptionsValue(parentDOM, potentialRecieverNamesArr);
+    console.log(potentialRecieverNamesArr);
+    return potentialRecieverNamesArr;
+}
+
+function isFormIsGoodToSubmit(recipientInfo, paymentAmount, description) {
+    if (recipientInfo && paymentAmount && description) {
+        return true;
+    }
+    return false;
+}
+
+function hidePopUp(){
+    popUpDOM.classList.add('hide');
+    popUpDOM.removeAttribute('id');
+    everythingExceptForm.forEach((element) => {
+        element.style = "filter: none;";
+    });
+}
+
+
+
+
+
+
+
 
 
 
