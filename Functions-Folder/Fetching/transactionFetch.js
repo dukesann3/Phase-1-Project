@@ -27,7 +27,6 @@ export function getTransactionData(callback) {
     return result;
 }
 
-
 //trying to loop thru fetched data until I find a certain object or array.
 /*
     "transactions": [
