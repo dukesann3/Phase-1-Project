@@ -14,6 +14,10 @@ const optionsDOM = document.querySelector('.reciever-name');
 const paymentAmountDOM = popUpDOM.querySelector('input[type=text]');
 const textAreaDOM = popUpDOM.querySelector('textarea');
 const formSubmitalDOM = popUpDOM.querySelector('input[type=submit]');
+const userBalanceView = document.querySelector('.user-balance-info');
+const userInitialDOMBalanceView = document.querySelector('.user-initials');
+const userBalanceExitSign = userBalanceView.querySelector('h6');
+const userBalanceText = userBalanceView.querySelector('span');
 
 document.addEventListener('DOMContentLoaded', async function (e) {
     e.preventDefault();
@@ -65,6 +69,15 @@ document.addEventListener('DOMContentLoaded', async function (e) {
         else{
             alert('Need to Fill Out Entire Form');
         }
+    });
+    userInitialDOMBalanceView.addEventListener('click', async function(e){
+        e.preventDefault();
+        userBalanceView.classList.remove('hide');
+        userBalanceText.textContent = `User Balance: $${await fetchSpecificUserNameBalance('User Name')}`;
+        userBalanceExitSign.addEventListener('click', function(e){
+            e.preventDefault();
+            userBalanceView.classList.add('hide');
+        })
     })
 
 });
@@ -160,6 +173,26 @@ function hidePopUp(){
     everythingExceptForm.forEach((element) => {
         element.style = "filter: none;";
     });
+}
+
+async function fetchSpecificUserNameBalance(username){
+    let users = await transactionRecieverName();
+    const returnObj = users.find((user) => {
+        let {first_name, last_name} = user;
+        let combinedName = first_name + ' ' + last_name;
+        if(username === combinedName){
+            return true;
+        }
+    });
+    if(returnObj){
+        const {user_balance} = returnObj;
+        console.log(user_balance);
+        return user_balance;
+    }
+    else{
+        console.log('This user is not registered in the database');
+        return;
+    }
 }
 
 

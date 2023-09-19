@@ -362,7 +362,7 @@ body > *:not(.pop-up-indicator){
 }
 
 .user-balance-info .user-balance .balance {
-    background: white;
+    background: #e4edf2;
     height: 17%;
     width: 90%;
     margin-top: 1.5rem;
@@ -375,4 +375,17 @@ body > *:not(.pop-up-indicator){
     position: relative;
     top: 18%;
     padding-left: 1rem;
+}
+
+.user-balance-info h6{
+    position: absolute;
+    color: #e4edf2;
+    font-family: 'roboto';
+    top: 45%;
+    left: 20%;
+}
+
+.user-balance-info h6:hover{
+    color: #27363f;
+    cursor: pointer;
 }
