@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             alert('Need to Fill Out Entire Form');
         }
     });
-    userInitialDOMBalanceView.addEventListener('click', async function (e) {
+    userInitialDOMBalanceView.addEventListener('mouseover', async function (e) {
         e.preventDefault();
         userBalanceView.classList.remove('hide');
         userBalanceText.textContent = `User Balance: $${await fetchSpecificUserNameBalance('User Name')}`;
