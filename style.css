@@ -24,6 +24,7 @@ body {
     background: #27363f;
     height: 6rem;
     top: -0.15rem;
+    overflow: hidden;
 }
 
 #search-fixed>* {
@@ -99,6 +100,18 @@ body {
     font-family: 'roboto';
 }
 
+@media screen and (max-width: 1004px) {
+    #search-fixed .user-initials {
+        background: #2b9ce3;
+        padding: 0 1rem 0 1rem;
+        border-radius: 3rem;
+        height: 3.7rem;
+        position: relative;
+        left: 4%;
+        cursor: pointer;
+    }
+}
+
 /* TRANSACION HISTORY */
 #text-saying-transaction-history {
     position: relative;
@@ -130,14 +143,19 @@ body {
     background: #496a7a;
     margin: 0 2rem 0 2rem;
     border-radius: 3rem;
-    height: 11rem;
+    height: auto;
     padding: 1rem 3rem 0 5rem;
     width: 55%;
     border: .1rem solid #e7a918;
     margin-top: 2rem;
 }
 
+#transaction-list .transaction:last-child {
+    margin-bottom: 2rem;
+}
+
 #transaction-list .transaction .user-initials {
+    margin-top: 1rem;
     margin-right: 1rem;
     background: #e4edf2;
     padding: 0 1rem 0 1rem;
@@ -156,20 +174,21 @@ body {
     align-items: flex-start;
     background: #496a7a;
     padding: 0 1rem 0 1rem;
-    height: 10rem;
+    height: auto;
     width: 90%;
-    border-radius: 2rem;
+    border-radius: 1rem;
 }
 
 .transaction .transaction-information-wrapper .reciever-and-payee {
     position: relative;
     left: 2rem;
     background: #27363f;
-    height: 2rem;
+    height: auto;
     width: 80%;
     margin: .5rem 0 .25rem 0;
     padding: 0 .5rem 1rem 1.5rem;
-    border-radius: 3rem;
+    border-radius: 1rem;
+    overflow: hidden;
 }
 
 /* In JS make username in yellow-orange color */
@@ -185,9 +204,9 @@ body {
     position: relative;
     left: 2rem;
     background: #27363f;
-    height: 4.2rem;
+    height: auto;
     width: 80%;
-    margin: .5rem 0 .25rem 0;
+    margin: .5rem 0 1rem 0;
     padding: 0 .5rem 1rem 1.5rem;
     border-radius: 1rem;
 }
@@ -215,6 +234,23 @@ body {
     border-radius: 1.25rem;
     align-items: center;
     border: .05rem solid #e6b632;
+}
+
+@media screen and (max-width: 870px) {
+    #pop-up {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        position: fixed;
+        background: #1f2a2f;
+        z-index: 10000;
+        top: 20%;
+        left: 30%;
+        padding: 1rem;
+        border-radius: 1.25rem;
+        align-items: center;
+        border: .05rem solid #e6b632;
+    }
 }
 
 #pop-up h5 {
@@ -310,12 +346,14 @@ body > *:not(.pop-up-indicator){
 
 .user-balance-info {
     position: fixed;
-    top: 13.5%;
-    left: 89.7%;
+    top: 18%;
+    left: 93%;
     z-index: 101;
     width: 20%;
+    height: auto;
 }
 
+/*
 .user-balance-info .triangle-up {
     width: 0;
     height: 0;
@@ -323,12 +361,13 @@ body > *:not(.pop-up-indicator){
     border-right: 15px solid transparent;
     border-bottom: 30px solid #1a648f;
 }
+*/
 
 .user-balance-info .user-balance {
     position: absolute;
     background: #1a648f;
     width: 90%;
-    height: 12rem;
+    height: auto;
     left: -60%;
     border-radius: 1.25rem;
     display: flex;
@@ -363,10 +402,12 @@ body > *:not(.pop-up-indicator){
 
 .user-balance-info .user-balance .balance {
     background: #e4edf2;
-    height: 17%;
-    width: 90%;
-    margin-top: 1.5rem;
+    height: auto;
+    width: 80%;
+    margin: 1rem 1rem 1.5rem 1rem;
     border-radius: 1.25rem;
+    overflow: hidden;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 .user-balance-info .user-balance .balance span {
@@ -377,7 +418,7 @@ body > *:not(.pop-up-indicator){
     padding-left: 1rem;
 }
 
-.user-balance-info h6{
+.user-balance-info h6 {
     position: absolute;
     color: #e4edf2;
     font-family: 'roboto';
@@ -385,7 +426,7 @@ body > *:not(.pop-up-indicator){
     left: 20%;
 }
 
-.user-balance-info h6:hover{
+.user-balance-info h6:hover {
     color: #27363f;
     cursor: pointer;
 }

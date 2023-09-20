@@ -62,7 +62,9 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             if (postedData) {
                 const { payor, recipient, description } = postedData;
                 setUpTransactionDOM(payor, recipient, description);
-                await changeAddUserBalance('User', 'Name', parseInt(paymentAmountDOM.value, 10), (a, b) => { return a - b;});
+                await changeAddUserBalance('User', 'Name', parseInt(paymentAmountDOM.value, 10), (a, b) => { return a - b; });
+                paymentAmountDOM.value = '';
+                textAreaDOM.value = '';
                 alert('Transaction Successful');
                 hidePopUp();
             }
@@ -78,9 +80,8 @@ document.addEventListener('DOMContentLoaded', async function (e) {
         userBalanceExitSign.addEventListener('click', function (e) {
             e.preventDefault();
             userBalanceView.classList.add('hide');
-        })
-    })
-
+        });
+    });
 });
 
 
@@ -206,7 +207,7 @@ async function changeAddUserBalance(firstName, lastName, addValue, callback) {
         }
     })
     console.log(selectedUser);
-    if(!selectedUser){
+    if (!selectedUser) {
         alert('user does not exist');
         return;
     }
