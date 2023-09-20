@@ -6,7 +6,7 @@
 
 //parses through list
 export function search(domList,keyword){
-    //I want to make sure that the search results are ordered per date.
+    //I want to make sure that the search results are ordered
     //need to flatten node element
     let newArr = Array.from(domList.children);
     let trimmedKeyword = keyword.replaceAll(' ','');

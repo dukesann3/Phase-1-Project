@@ -1,7 +1,8 @@
 import { search } from "./Functions-Folder/Search-Methods/searching.js";
 import { divFrameworkThreeLevelsOfTreeCreator, domFrameWorkClassAdder } from "./Functions-Folder/DOM-Manipulation/transactionDOM.js";
-import { transactionRecieverName, postSubmitalInformation, putUserInfo } from "./Functions-Folder/Fetching/transactionFetch.js";
-import { addOptionsValue } from "./Functions-Folder/DOM-Manipulation/optionsAddingUser.js";
+import { postSubmitalInformation } from "./Functions-Folder/Fetching/transactionFetch.js";
+import { addOptionsFromFetchedValue } from "./Functions-Folder/Fetching/manipulatingFetchedData.js";
+import { changeAddUserBalance, fetchSpecificUserNameBalance, getInitials } from "./Functions-Folder/Fetching/manipulatingFetchedData.js";
 
 const classListArrayTransaction = ['transaction', 'user-initials', 'transaction-information-wrapper', 'reciever-and-payee', 'transaction-description'];
 const transactionParent = document.querySelector('#transaction-list');
@@ -85,18 +86,6 @@ document.addEventListener('DOMContentLoaded', async function (e) {
 });
 
 
-//recieves name as an argument and returns initials
-function getInitials(payorName) {
-    //now make this string into an array
-    const arrPayorName = payorName.split(" ");
-    //make empty array to put in first letter of first and last name
-    let arrayOfLetters = [];
-    arrPayorName.forEach((word) => {
-        arrayOfLetters.push(word.charAt(0));
-    })
-    const initials = arrayOfLetters.join("");
-    return initials;
-}
 
 //this function is specifically designed for transaction DOM 
 //the 3 args are proeprties of the transaction response.
@@ -144,24 +133,6 @@ function fetchTransactionAndSetUpDOM() {
     return result;
 }
 
-async function addOptionsFromFetchedValue(parentDOM, firstNameOmit, lastNameOmit) {
-    let result = await transactionRecieverName();
-    let potentialRecieverNamesArr = [];
-    result.forEach((object) => {
-        let { first_name, last_name } = object;
-        if (first_name === firstNameOmit && last_name === lastNameOmit) {
-            //skips omitted users
-            //in other words this is used to not display the actual user's name
-            return;
-        }
-        let displayName = first_name + ' ' + last_name;
-        potentialRecieverNamesArr.push(displayName);
-    })
-    addOptionsValue(parentDOM, potentialRecieverNamesArr);
-    console.log(potentialRecieverNamesArr);
-    return potentialRecieverNamesArr;
-}
-
 function isFormIsGoodToSubmit(recipientInfo, paymentAmount, description) {
     if (recipientInfo && paymentAmount && description) {
         return true;
@@ -177,54 +148,9 @@ function hidePopUp() {
     });
 }
 
-async function fetchSpecificUserNameBalance(username) {
-    let users = await transactionRecieverName();
-    const returnObj = users.find((user) => {
-        let { first_name, last_name } = user;
-        let combinedName = first_name + ' ' + last_name;
-        if (username === combinedName) {
-            return true;
-        }
-    });
-    if (returnObj) {
-        const { user_balance } = returnObj;
-        console.log(user_balance);
-        return user_balance;
-    }
-    else {
-        console.log('This user is not registered in the database');
-        return;
-    }
-}
 
-/* putUserInfo(originalPrice,addPrice,userid,callback) */
-async function changeAddUserBalance(firstName, lastName, addValue, callback) {
-    let putValue;
-    let userInfo = await transactionRecieverName();
-    let selectedUser = userInfo.find((element) => {
-        if (element.first_name === firstName && element.last_name === lastName) {
-            return true;
-        }
-    })
-    console.log(selectedUser);
-    if (!selectedUser) {
-        alert('user does not exist');
-        return;
-    }
-    const { user_balance, id } = selectedUser;
-    putValue = await putUserInfo(parseInt(user_balance, 10), addValue, id, callback);
-    console.log(putValue);
-    return putValue;
-}
 
-/*    
-{
-      "id": 5,
-      "first_name": "User",
-      "last_name": "Name",
-      "user_balance": 0
-} 
-*/
+
 
 
 
