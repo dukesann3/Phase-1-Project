@@ -64,6 +64,13 @@ export async function transactionRecieverName() {
         })
 }
 
+export async function getTransactions(){
+    return fetch('http://localhost:3000/transactions')
+    .then((response) => {
+        return response.json();
+    })
+}
+
 /*
 POST REQUEST EXAMPLE
 
@@ -109,6 +116,23 @@ export async function postSubmitalInformation(payor,recipient,pay_amount,descrip
         return response.json();
     })
 
+}
+
+//manipulates user balance when paying from paying form
+export async function putUserInfo(originalPrice,addPrice,userid,callback){
+    //can be either subtraction or addition
+    const newPrice = callback(originalPrice,addPrice);
+    let requestOptions = {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            user_balance: newPrice
+        })
+    };
+    return fetch(`http://localhost:3000/users/${userid}`,requestOptions)
+    .then((response) => {
+        return response.json();
+    });
 }
 
 

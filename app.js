@@ -1,6 +1,6 @@
 import { search } from "./Functions-Folder/Search-Methods/searching.js";
 import { divFrameworkThreeLevelsOfTreeCreator, domFrameWorkClassAdder } from "./Functions-Folder/DOM-Manipulation/transactionDOM.js";
-import { transactionRecieverName, postSubmitalInformation } from "./Functions-Folder/Fetching/transactionFetch.js";
+import { transactionRecieverName, postSubmitalInformation, putUserInfo } from "./Functions-Folder/Fetching/transactionFetch.js";
 import { addOptionsValue } from "./Functions-Folder/DOM-Manipulation/optionsAddingUser.js";
 
 const classListArrayTransaction = ['transaction', 'user-initials', 'transaction-information-wrapper', 'reciever-and-payee', 'transaction-description'];
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             element.style = "filter: blur(10px);";
         });
     });
-    exitFormDOM.addEventListener('click', ()=>{hidePopUp()});
+    exitFormDOM.addEventListener('click', () => { hidePopUp() });
     optionsDOM.addEventListener('click', addOptionsFromFetchedValue(optionsDOM, 'User', 'Name'));
     paymentAmountDOM.addEventListener('click', function (e) {
         e.target.addEventListener('input', function (e) {
@@ -57,24 +57,25 @@ document.addEventListener('DOMContentLoaded', async function (e) {
     });
     formSubmitalDOM.addEventListener('click', async function (e) {
         e.preventDefault();
-        if(isFormIsGoodToSubmit(optionsDOM.value, paymentAmountDOM.value, textAreaDOM.value)){
-            let postedData = await postSubmitalInformation('User Name',optionsDOM.value,parseInt(paymentAmountDOM.value,10),textAreaDOM.value);
-            if(postedData){
-                const {payor, recipient, description} = postedData;
-                setUpTransactionDOM(payor,recipient,description);
+        if (isFormIsGoodToSubmit(optionsDOM.value, paymentAmountDOM.value, textAreaDOM.value)) {
+            let postedData = await postSubmitalInformation('User Name', optionsDOM.value, parseInt(paymentAmountDOM.value, 10), textAreaDOM.value);
+            if (postedData) {
+                const { payor, recipient, description } = postedData;
+                setUpTransactionDOM(payor, recipient, description);
+                await changeAddUserBalance('User', 'Name', parseInt(paymentAmountDOM.value, 10), (a, b) => { return a - b;});
                 alert('Transaction Successful');
                 hidePopUp();
             }
         }
-        else{
+        else {
             alert('Need to Fill Out Entire Form');
         }
     });
-    userInitialDOMBalanceView.addEventListener('click', async function(e){
+    userInitialDOMBalanceView.addEventListener('click', async function (e) {
         e.preventDefault();
         userBalanceView.classList.remove('hide');
         userBalanceText.textContent = `User Balance: $${await fetchSpecificUserNameBalance('User Name')}`;
-        userBalanceExitSign.addEventListener('click', function(e){
+        userBalanceExitSign.addEventListener('click', function (e) {
             e.preventDefault();
             userBalanceView.classList.add('hide');
         })
@@ -167,7 +168,7 @@ function isFormIsGoodToSubmit(recipientInfo, paymentAmount, description) {
     return false;
 }
 
-function hidePopUp(){
+function hidePopUp() {
     popUpDOM.classList.add('hide');
     popUpDOM.removeAttribute('id');
     everythingExceptForm.forEach((element) => {
@@ -175,25 +176,58 @@ function hidePopUp(){
     });
 }
 
-async function fetchSpecificUserNameBalance(username){
+async function fetchSpecificUserNameBalance(username) {
     let users = await transactionRecieverName();
     const returnObj = users.find((user) => {
-        let {first_name, last_name} = user;
+        let { first_name, last_name } = user;
         let combinedName = first_name + ' ' + last_name;
-        if(username === combinedName){
+        if (username === combinedName) {
             return true;
         }
     });
-    if(returnObj){
-        const {user_balance} = returnObj;
+    if (returnObj) {
+        const { user_balance } = returnObj;
         console.log(user_balance);
         return user_balance;
     }
-    else{
+    else {
         console.log('This user is not registered in the database');
         return;
     }
 }
+
+/* putUserInfo(originalPrice,addPrice,userid,callback) */
+async function changeAddUserBalance(firstName, lastName, addValue, callback) {
+    let putValue;
+    let userInfo = await transactionRecieverName();
+    let selectedUser = userInfo.find((element) => {
+        if (element.first_name === firstName && element.last_name === lastName) {
+            return true;
+        }
+    })
+    console.log(selectedUser);
+    if(!selectedUser){
+        alert('user does not exist');
+        return;
+    }
+    const { user_balance, id } = selectedUser;
+    putValue = await putUserInfo(parseInt(user_balance, 10), addValue, id, callback);
+    console.log(putValue);
+    return putValue;
+}
+
+/*    
+{
+      "id": 5,
+      "first_name": "User",
+      "last_name": "Name",
+      "user_balance": 0
+} 
+*/
+
+
+
+
 
 
 
