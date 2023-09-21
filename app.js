@@ -4,6 +4,8 @@ import { postSubmitalInformation } from "./Functions-Folder/Fetching/transaction
 import { addOptionsFromFetchedValue } from "./Functions-Folder/Fetching/manipulatingFetchedData.js";
 import { changeAddUserBalance, fetchSpecificUserNameBalance, getInitials } from "./Functions-Folder/Fetching/manipulatingFetchedData.js";
 
+/*------------ DOM selectors --------------------------------------------------------------------------------------------*/
+
 const classListArrayTransaction = ['transaction', 'user-initials', 'transaction-information-wrapper', 'reciever-and-payee', 'transaction-description'];
 const transactionParent = document.querySelector('#transaction-list');
 const searchDOM = document.querySelector('#search-fixed input');
@@ -25,14 +27,21 @@ const addFundsExit = addFundsDOM.querySelector('.pop-up-indicator h5');
 const addFundsSubmital = addFundsDOM.querySelector('input[type=submit]');
 const addFundsAmount = addFundsDOM.querySelector('input[type=text]');
 
+/*---------------Event Listeners---------------------------------------------------------------------------------------------*/
+
+//triggers when DOM first loads
 document.addEventListener('DOMContentLoaded', async function (e) {
     e.preventDefault();
+    //fetches transactions from database and parses them into DOM
     fetchTransactionAndSetUpDOM();
-    //subject to change... Cannot get it to update 'change'
+
+    //filters transaction list per user input in search field
     searchDOM.addEventListener('input', (e) => {
         e.preventDefault();
         search(transactionParent, e.target.value);
     });
+
+    //when pay button is clicked, popup DOM will appear and blurs out everything except for itself
     payDOM.addEventListener('click', (e) => {
         e.preventDefault();
         popUpDOM.classList.remove('hide');
@@ -45,7 +54,11 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             element.style = "filter: blur(10px);";
         });
     });
+
+    //when exit button is clicked, it exits out of pay form
     exitFormDOM.addEventListener('click', () => { hidePopUp() });
+
+    //when funds button is clicked, a popup DOM will appear and blurs everything except for itself
     addFundsButton.addEventListener('click', (e) => {
         e.preventDefault();
         addFundsDOM.classList.remove('hide');
@@ -57,9 +70,17 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             }
             element.style = "filter: blur(10px);";
         });
-    })
+    });
+
+    //when exit button is clicked, it exits out of funds form
     addFundsExit.addEventListener('click', () => { addFundsHidePopUp() });
+
+    //Inside of pay form, it will have options for recievers for your money.
+    //Fetches the user's friends from the database and puts names as options in <select> field
     optionsDOM.addEventListener('click', addOptionsFromFetchedValue(optionsDOM, 'User', 'Name'));
+
+    //Inside of pay form, it will have a payment field. This code makes sure that the amount
+    //is not 0 or NaN.
     paymentAmountDOM.addEventListener('click', function (e) {
         e.target.addEventListener('input', function (e) {
             if (e.target.value && isNaN(e.target.value)) {
@@ -69,11 +90,18 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             }
         })
     });
+
+    //Inside of pay form, it will have a description text area. It makes sure that the description
+    //is not blank
     textAreaDOM.addEventListener('blur', function (e) {
         if (!e.target.value) {
             alert('need a description for payment');
         }
     });
+
+    //This is for payment form submital. If form is filled out completely, it will post this transaction information
+    //onto the json-server transaction database. And it will also give a PATCH request to update the user's balance from
+    //json-server's users database.
     formSubmitalDOM.addEventListener('click', async function (e) {
         e.preventDefault();
         if (isFormIsGoodToSubmit(optionsDOM.value, paymentAmountDOM.value, textAreaDOM.value)) {
@@ -92,6 +120,9 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             alert('Need to Fill Out Entire Form');
         }
     });
+
+    //This is for funds submital. If the payment amount is not NaN or not a 0, it will go ahead and
+    //do a PATCH request to update the user's balance from json-server's users database
     addFundsSubmital.addEventListener('click', async function (e) {
         e.preventDefault();
         if (!addFundsAmount.value || isNaN(addFundsAmount.value)) {
@@ -103,6 +134,10 @@ document.addEventListener('DOMContentLoaded', async function (e) {
         alert('Added Funds Successfully');
         addFundsHidePopUp();
     })
+
+    //When the initals 'circle' on the top right of the screen is hovered, it will trigger a mini popup
+    //that will reveal the user's name and the user's balance. The user's balance is fetched through a 
+    //GET request from json-server's users database.
     userInitialDOMBalanceView.addEventListener('mouseover', async function (e) {
         e.preventDefault();
         userBalanceView.classList.remove('hide');
@@ -114,10 +149,13 @@ document.addEventListener('DOMContentLoaded', async function (e) {
     });
 });
 
+/*---------------Support Functions---------------------------------------------------------------------------------------------*/
+
 
 
 //this function is specifically designed for transaction DOM 
 //the 3 args are proeprties of the transaction response.
+//This function will create each individual transaction element on HTML and CSS.
 function setUpTransactionDOM(payor, recipient, description) {
     let nodeFramework = divFrameworkThreeLevelsOfTreeCreator(2, 0, 2);
     let domWithClass = domFrameWorkClassAdder(nodeFramework, classListArrayTransaction);
@@ -145,6 +183,9 @@ function setUpTransactionDOM(payor, recipient, description) {
     return domWithClass;
 }
 
+//This function will fetch all transactions from json-server's transaction database,
+//and it will perform setUpTransactionDOM for each individual transactions and puts them
+//into the DOM.
 function fetchTransactionAndSetUpDOM() {
     const baseURL = 'http://localhost:3000/transactions';
     const result = fetch(baseURL)
@@ -162,6 +203,7 @@ function fetchTransactionAndSetUpDOM() {
     return result;
 }
 
+//This returns if the payment submital form is good to complete and everything is filled out
 function isFormIsGoodToSubmit(recipientInfo, paymentAmount, description) {
     if (recipientInfo && paymentAmount && description) {
         return true;
@@ -169,6 +211,7 @@ function isFormIsGoodToSubmit(recipientInfo, paymentAmount, description) {
     return false;
 }
 
+//This hides or exits out of the pop-up for the payment screen.
 function hidePopUp() {
     popUpDOM.classList.add('hide');
     popUpDOM.removeAttribute('id');
@@ -177,6 +220,7 @@ function hidePopUp() {
     });
 }
 
+//This hides or exits out of the pop-up for the add funds screen.
 function addFundsHidePopUp() {
     addFundsDOM.classList.add('hide');
     addFundsDOM.removeAttribute('id');
