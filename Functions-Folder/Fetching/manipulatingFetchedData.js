@@ -1,6 +1,7 @@
 import { patchUserInfo, getUsers } from "./transactionFetch.js";
 import { addOptionsValue } from "../DOM-Manipulation/optionsAddingUser.js";
 
+//manipulates user balance from payment submital form
 export async function changeAddUserBalance(firstName, lastName, addValue, callback) {
     let putValue;
     let userInfo = await getUsers();

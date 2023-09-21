@@ -48,6 +48,20 @@
       "recipient": "Georgia Hudson",
       "pay_amount": 0.01,
       "description": "Plumbing Bill @$#$@"
+    },
+    {
+      "payor": "User Name",
+      "recipient": "Jessica Johnson",
+      "pay_amount": 1222,
+      "description": "asd",
+      "id": 8
+    },
+    {
+      "payor": "User Name",
+      "recipient": "Jessica Johnson",
+      "pay_amount": 1220000,
+      "description": "bush meat\n",
+      "id": 9
     }
   ],
   "users": [
@@ -79,7 +93,7 @@
       "id": 5,
       "first_name": "User",
       "last_name": "Name",
-      "user_balance": -10000002122
+      "user_balance": -1100000
     }
   ]
 }

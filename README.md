@@ -24,7 +24,7 @@ currency with friends.
 This app is simply a digital wallet where users can exchange money with other users.
 
 *Notice*: Due to the restrictions of this project, the app already assumes the user has 
-logged onto his/her FLATMO account. And it also does not have functionality to add funds into account.
+logged onto his/her FLATMO account. 
 
 FEATURE 1: When the user first opens the app, he/she is greeted with list of user and user's friends' transactions
 have done. Each transaction will have a "WHO PAID WHO", payor initials, and a description. This information
@@ -46,7 +46,12 @@ user that it needs to be fully filled out. Once filled, the submit button may be
 trigger a POST request, posting a new transaction in the JSON-server database. The change will also be reflected 
 on the BOM as well. Simultaneously, it will also trigger a PATCH request to update the user's balance as well.
 
-FEATURE 4: At the top right corner of the website, the user will see "user initials" wrapped in a circular frame.
+FEATURE 4: There is a add funds button next to the pay button. Once clicked, it will open another pop up similar to 
+the pay button. This time, it will have only one value: payment amount. The app makes sure that the payment 
+is a number and filled out. Once filled and submit button is clicked, it will trigger a PATCH request to update
+and add funds to the user's balance.
+
+FEATURE 5: At the top right corner of the website, the user will see "user initials" wrapped in a circular frame.
 It will say "UN" as an initial for user name. If an user hovers over the initials, and it will pop up a display
 showing how much money the user has in his/her "wallet". This information is fetched through a GET request.
 

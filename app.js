@@ -8,7 +8,7 @@ const classListArrayTransaction = ['transaction', 'user-initials', 'transaction-
 const transactionParent = document.querySelector('#transaction-list');
 const searchDOM = document.querySelector('#search-fixed input');
 const payDOM = document.querySelector('#search-fixed button');
-const popUpDOM = document.querySelector('.pop-up-indicator');
+const popUpDOM = document.querySelector('.pay-form');
 const everythingExceptForm = document.querySelectorAll('div:not(.pop-up-indicator)');
 const exitFormDOM = document.querySelector('.pop-up-indicator h5');
 const optionsDOM = document.querySelector('.reciever-name');
@@ -19,6 +19,11 @@ const userBalanceView = document.querySelector('.user-balance-info');
 const userInitialDOMBalanceView = document.querySelector('.user-initials');
 const userBalanceExitSign = userBalanceView.querySelector('h6');
 const userBalanceText = userBalanceView.querySelector('span');
+const addFundsButton = document.querySelector('#search-fixed button:last-of-type');
+const addFundsDOM = document.querySelector('.add-funds-form');
+const addFundsExit = addFundsDOM.querySelector('.pop-up-indicator h5');
+const addFundsSubmital = addFundsDOM.querySelector('input[type=submit]');
+const addFundsAmount = addFundsDOM.querySelector('input[type=text]');
 
 document.addEventListener('DOMContentLoaded', async function (e) {
     e.preventDefault();
@@ -41,6 +46,19 @@ document.addEventListener('DOMContentLoaded', async function (e) {
         });
     });
     exitFormDOM.addEventListener('click', () => { hidePopUp() });
+    addFundsButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        addFundsDOM.classList.remove('hide');
+        addFundsDOM.setAttribute('id', 'pop-up');
+        everythingExceptForm.forEach((element) => {
+            //blurs everything except for form initials div
+            if (element.classList.contains('initials') || element.hasAttribute('isDropDownMenu')) {
+                return;
+            }
+            element.style = "filter: blur(10px);";
+        });
+    })
+    addFundsExit.addEventListener('click', () => { addFundsHidePopUp() });
     optionsDOM.addEventListener('click', addOptionsFromFetchedValue(optionsDOM, 'User', 'Name'));
     paymentAmountDOM.addEventListener('click', function (e) {
         e.target.addEventListener('input', function (e) {
@@ -74,6 +92,17 @@ document.addEventListener('DOMContentLoaded', async function (e) {
             alert('Need to Fill Out Entire Form');
         }
     });
+    addFundsSubmital.addEventListener('click', async function (e) {
+        e.preventDefault();
+        if (!addFundsAmount.value || isNaN(addFundsAmount.value)) {
+            alert('Need to Fill Out Form Properly');
+            return;
+        }
+        await changeAddUserBalance('User', 'Name', parseInt(addFundsAmount.value, 10), (a, b) => { return a + b });
+        addFundsAmount.value = '';
+        alert('Added Funds Successfully');
+        addFundsHidePopUp();
+    })
     userInitialDOMBalanceView.addEventListener('mouseover', async function (e) {
         e.preventDefault();
         userBalanceView.classList.remove('hide');
@@ -143,6 +172,14 @@ function isFormIsGoodToSubmit(recipientInfo, paymentAmount, description) {
 function hidePopUp() {
     popUpDOM.classList.add('hide');
     popUpDOM.removeAttribute('id');
+    everythingExceptForm.forEach((element) => {
+        element.style = "filter: none;";
+    });
+}
+
+function addFundsHidePopUp() {
+    addFundsDOM.classList.add('hide');
+    addFundsDOM.removeAttribute('id');
     everythingExceptForm.forEach((element) => {
         element.style = "filter: none;";
     });
