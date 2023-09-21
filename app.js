@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async function (e) {
     //do a PATCH request to update the user's balance from json-server's users database
     addFundsSubmital.addEventListener('click', async function (e) {
         e.preventDefault();
-        if (!addFundsAmount.value || isNaN(addFundsAmount.value)) {
+        if (!addFundsAmount.value) {
             alert('Need to Fill Out Form Properly');
             return;
         }
@@ -135,7 +135,17 @@ document.addEventListener('DOMContentLoaded', async function (e) {
         addFundsAmount.value = '';
         alert('Added Funds Successfully');
         addFundsHidePopUp();
-    })
+    });
+
+    addFundsDOM.addEventListener('click', function (e) {
+        e.target.addEventListener('input', function (e) {
+            if (e.target.value && isNaN(e.target.value)) {
+                e.target.value = '';
+                alert('need a number for payment amount');
+                //deletes NaN value from input area
+            }
+        })
+    });
 
     //When the initals 'circle' on the top right of the screen is hovered, it will trigger a mini popup
     //that will reveal the user's name and the user's balance. The user's balance is fetched through a 
