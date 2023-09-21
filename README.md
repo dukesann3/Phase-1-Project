@@ -26,10 +26,10 @@ This app is simply a digital wallet where users can exchange money with other us
 *Notice*: Due to the restrictions of this project, the app already assumes the user has 
 logged onto his/her FLATMO account. And it also does not have functionality to add funds into account.
 
-FEATURE 1: When the user first opens the app, he/she is greeted with lists of transactions his/her friends 
+FEATURE 1: When the user first opens the app, he/she is greeted with list of user and user's friends' transactions
 have done. Each transaction will have a "WHO PAID WHO", payor initials, and a description. This information
 is stored in JSON-server, which a mock REST API tool where it acts like a database for all transactions
-and friends of the user. Each data points are parsed and integrated into the DOM.
+and friends of the user. Each transactions are fetched using GET, parsed, and integrated into the DOM.
 
 FEATURE 2: There will be a search bar at the top center of the website. When entering in the textbox, it will
 filter the transactions listed in the website to match the user input and user names who paid or recieved money.
@@ -52,14 +52,14 @@ showing how much money the user has in his/her "wallet". This information is fet
 
 --- WHY JSON-SERVER WAS USED -----------------------------------------------------------------------------------
 
-The main reason JSON-server was used instead of a free API that is already built is because it gives me more
-freedom for my app and also, it is a good practice for making/organizing databases for my next phase projects.
+The main reason JSON-server was used instead of a prebuilt API is because it gives me more
+freedom and also, it is good practice for making/organizing databases for my next phase projects.
 
 --- CHALLENGES I FACED ------------------------------------------------------------------------------------------
 
 The biggest challenge I faced was a combination of my inexperience and the unknown. Although, I was able to 
-finish the project, I was moving signifcantly slower and enountered a lot of new obstacles such as creating
-a search bar from scratch.
+finish the project, I was moving signifcantly slow and enountered a lot of new obstacles such as creating
+a search bar from scratch and figuring out how to utilize CSS.
 
 
 
