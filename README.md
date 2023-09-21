@@ -5,6 +5,7 @@
 ------------------------------------------------------------------------------------------------------------
 
 --- FLATMO --- ---------------------------------------------------------------------------------------------
+
 This website 'FLATMO' is a knock-off version of 'VEN-MO' where users can exchange
 currency with friends.
 
@@ -19,6 +20,7 @@ currency with friends.
 4. Launch website
 
 --- PROJECT DESCRIPTION ------------------------------------------------------------------------------------
+
 This app is simply a digital wallet where users can exchange money with other users.
 
 *Notice*: Due to the restrictions of this project, the app already assumes the user has 
@@ -49,10 +51,12 @@ It will say "UN" as an initial for user name. If an user hovers over the initial
 showing how much money the user has in his/her "wallet". This information is fetched through a GET request.
 
 --- WHY JSON-SERVER WAS USED -----------------------------------------------------------------------------------
+
 The main reason JSON-server was used instead of a free API that is already built is because it gives me more
 freedom for my app and also, it is a good practice for making/organizing databases for my next phase projects.
 
 --- CHALLENGES I FACED ------------------------------------------------------------------------------------------
+
 The biggest challenge I faced was a combination of my inexperience and the unknown. Although, I was able to 
 finish the project, I was moving signifcantly slower and enountered a lot of new obstacles such as creating
 a search bar from scratch.
