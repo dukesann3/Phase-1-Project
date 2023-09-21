@@ -24,7 +24,7 @@ currency with friends.
 This app is simply a digital wallet where users can exchange money with other users.
 
 *Notice*: Due to the restrictions of this project, the app already assumes the user has 
-logged onto his/her FLATMO account. 
+logged onto his/her FLATMO account. And it also does not have functionality to add funds into account.
 
 FEATURE 1: When the user first opens the app, he/she is greeted with lists of transactions his/her friends 
 have done. Each transaction will have a "WHO PAID WHO", payor initials, and a description. This information
