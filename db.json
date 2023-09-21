@@ -62,6 +62,20 @@
       "pay_amount": 1220000,
       "description": "bush meat\n",
       "id": 9
+    },
+    {
+      "payor": "User Name",
+      "recipient": "Houston McMaster",
+      "pay_amount": 120,
+      "description": "burger",
+      "id": 10
+    },
+    {
+      "payor": "User Name",
+      "recipient": "Jessica Johnson",
+      "pay_amount": 100000,
+      "description": "fondue",
+      "id": 11
     }
   ],
   "users": [
@@ -69,7 +83,7 @@
       "id": 1,
       "first_name": "Jessica",
       "last_name": "Johnson",
-      "user_balance": 20
+      "user_balance": 100020
     },
     {
       "id": 2,
@@ -93,7 +107,7 @@
       "id": 5,
       "first_name": "User",
       "last_name": "Name",
-      "user_balance": -1100000
+      "user_balance": -1080120
     }
   ]
 }

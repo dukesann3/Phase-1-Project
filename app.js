@@ -110,6 +110,8 @@ document.addEventListener('DOMContentLoaded', async function (e) {
                 const { payor, recipient, description } = postedData;
                 setUpTransactionDOM(payor, recipient, description);
                 await changeAddUserBalance('User', 'Name', parseInt(paymentAmountDOM.value, 10), (a, b) => { return a - b; });
+                let recArr = recipient.split(" ");
+                await changeAddUserBalance(recArr[0], recArr[1], parseInt(paymentAmountDOM.value, 10), (a, b) => { return a + b; });
                 paymentAmountDOM.value = '';
                 textAreaDOM.value = '';
                 alert('Transaction Successful');
